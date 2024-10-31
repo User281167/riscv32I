@@ -22,6 +22,7 @@ module test_instruction_memory;
 
         if (instruction != expected) begin
             $display("Test 1 Failed: address: 0x%x, instruction: 0x%x (expected instruction: 0x%x)", address, instruction, expected);
+            $finish;
         end
 
         address = 1;
@@ -30,6 +31,7 @@ module test_instruction_memory;
 
         if (instruction != expected) begin
             $display("Test 2 Failed: address: 0x%x, instruction: 0x%x (expected instruction: 0x%x)", address, instruction, expected);
+            $finish;
         end
 
         address = 2;
@@ -38,6 +40,7 @@ module test_instruction_memory;
 
         if (instruction != expected) begin
             $display("Test 3 Failed: address: 0x%x, instruction: 0x%x (expected instruction: 0x%x)", address, instruction, expected);
+            $finish;
         end
 
         address = 3;
@@ -46,6 +49,7 @@ module test_instruction_memory;
 
         if (instruction != expected) begin
             $display("Test 4 Failed: address: 0x%x, instruction: 0x%x (expected instruction: 0x%x)", address, instruction, expected);
+            $finish;
         end
 
         address = 17;
@@ -54,6 +58,7 @@ module test_instruction_memory;
 
         if (instruction != expected) begin
             $display("Test 5 Failed: address: 0x%x, instruction: 0x%x (expected instruction: 0x%x)", address, instruction, expected);
+            $finish;
         end
 
         $finish;
