@@ -1,6 +1,3 @@
-`include "modules/sum_4.sv"
-`include "modules/program_counter.sv"
-
 module riscv(
     input logic clk
 );
