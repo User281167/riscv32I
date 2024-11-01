@@ -20,7 +20,7 @@ module test_mux_2();
         a = 32'h00000000;
         b = 32'hffffffff;
         sel = 1'b1;
-        #(period);
+        #period;
 
         if (out_mux != a) begin
             $display("Test 1 failed");

@@ -5,11 +5,9 @@ module mux_2(
     output logic [31:0] out_mux
 );
     always @(*) begin
-        if (sel == 1) begin
-            out_mux = a;
-        end
-        else begin
-            out_mux = b;
-        end
+        case (sel)
+            1'b0: out_mux = a;
+            1'b1: out_mux = b;
+        endcase
     end
 endmodule
