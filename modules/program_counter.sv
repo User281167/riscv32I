@@ -4,6 +4,6 @@ module program_counter(
     output logic [31:0] current_pc = 0
 );
     always @(posedge clk) begin
-        current_pc = next_pc;
+        current_pc <= next_pc;
     end
 endmodule

@@ -3,6 +3,6 @@ module sum_4 (
     output logic [31:0] next_pc
 );
     always @(current_pc) begin
-        next_pc = current_pc + 4;
+        next_pc <= current_pc + 4;
     end
 endmodule

@@ -14,6 +14,6 @@ module instruction_memory(
     end
 
     always @(address) begin
-        instruction = memory[address];
+        instruction <= memory[address];
     end
 endmodule

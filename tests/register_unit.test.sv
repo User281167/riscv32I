@@ -1,6 +1,6 @@
 `timescale 1ns/1ns
 
-module test_register_file;
+module test_register_unit;
     logic clk;
     logic [4:0] rs1;
     logic [4:0] rs2;
@@ -13,7 +13,7 @@ module test_register_file;
     int half_period = 10;
     int period = 20;
 
-    register_file utt (
+    register_unit utt (
         .clk(clk),
         .rs1(rs1),
         .rs2(rs2),
@@ -25,8 +25,8 @@ module test_register_file;
     );
 
     initial begin
-        $dumpfile("register_file.vcd");
-        $dumpvars(0, test_register_file);
+        $dumpfile("register_unit.vcd");
+        $dumpvars(0, test_register_unit);
 
         #1000 #period $finish;
     end

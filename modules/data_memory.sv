@@ -22,19 +22,19 @@ module data_memory(
         if (write_en == 0) begin
             case (dm_control)
                 3'b000: begin
-                    read_data = {{24{memory[address][7]}}, memory[address][7:0]};
+                    read_data <= {{24{memory[address][7]}}, memory[address][7:0]}; // load byte
                 end
                 3'b001: begin
-                    read_data = {{16{memory[address][15]}}, memory[address][15:0]};
+                    read_data <= {{16{memory[address][15]}}, memory[address][15:0]}; // load halfword
                 end
                 3'b010: begin
-                    read_data = memory[address];
+                    read_data <= memory[address]; // load word
                 end
                 3'b100: begin
-                    read_data = {{24{1'b0}}, memory[address][7:0]};
+                    read_data <= {{24{1'b0}}, memory[address][7:0]}; // load byte unsigned
                 end
                 3'b101: begin
-                    read_data = {{16{1'b0}}, memory[address][15:0]};
+                    read_data <= {{16{1'b0}}, memory[address][15:0]}; // load halfword unsigned
                 end
             endcase
         end

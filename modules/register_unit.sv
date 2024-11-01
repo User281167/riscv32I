@@ -1,4 +1,4 @@
-module register_file(
+module register_unit(
     input logic clk,
     input logic [4:0] rs1,
     input logic [4:0] rs2,
