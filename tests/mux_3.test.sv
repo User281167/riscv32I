@@ -3,7 +3,7 @@ module test_mux_3;
     logic [31:0] b;
     logic [31:0] c;
     logic [1:0] sel;
-    logic [31:0] out_mux;
+    logic [31:0] mux_out;
     int period = 10;
 
     mux_3 utt(
@@ -11,7 +11,7 @@ module test_mux_3;
         .b(b),
         .c(c),
         .sel(sel),
-        .out_mux(out_mux)
+        .mux_out(mux_out)
     );
 
     initial begin
@@ -26,7 +26,7 @@ module test_mux_3;
         sel = 2'b00;
         #period;
 
-        if (out_mux != a) begin
+        if (mux_out != a) begin
             $display("Test 1 failed");
             $finish;
         end
@@ -34,7 +34,7 @@ module test_mux_3;
         sel = 2'b01;
         #period;
 
-        if (out_mux != b) begin
+        if (mux_out != b) begin
             $display("Test 2 failed");
             $finish;
         end
@@ -42,7 +42,7 @@ module test_mux_3;
         sel = 2'b10;
         #period;
 
-        if (out_mux != c) begin
+        if (mux_out != c) begin
             $display("Test 3 failed");
             $finish;
         end
