@@ -45,6 +45,7 @@ module test_sum_4;
         $display("Test 6 current_pc: 0x%x, next_pc: 0x%x (expected next_pc: 0x00000000)", current_pc, next_pc);
         if (next_pc != 32'h00000000) $finish;
 
+        $display("All tests passed");
         #10 $finish;
     end
 endmodule
