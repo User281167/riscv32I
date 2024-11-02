@@ -119,5 +119,7 @@ module imm_generate_test();
             $display("Test 9 Failed: imm_out: 0x%x (expected imm_out: 0x%x)", imm_out, expected);
             $finish;
         end
+
+        $display("All tests passed");
     end
 endmodule

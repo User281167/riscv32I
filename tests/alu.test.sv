@@ -260,5 +260,7 @@ module test_alu;
                 $finish;
             end
         end
+
+        $display("All tests passed");
     end
 endmodule

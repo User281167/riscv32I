@@ -121,6 +121,7 @@ module test_register_unit;
             #period $finish;
         end
 
+        $display("All tests passed");
         #period $finish;
     end
 endmodule

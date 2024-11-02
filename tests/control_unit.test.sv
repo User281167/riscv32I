@@ -248,6 +248,7 @@ module test_control_unit;
             $finish;
         end
 
+        $display("All tests passed");
         #period $finish;
     end
 endmodule

@@ -181,6 +181,7 @@ module test_branch_unit();
             $finish;
         end
 
+        $display("All tests passed");
         #period $finish;
     end
 endmodule

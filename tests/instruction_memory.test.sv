@@ -61,6 +61,7 @@ module test_instruction_memory;
             $finish;
         end
 
+        $display("All tests passed");
         $finish;
     end
 endmodule

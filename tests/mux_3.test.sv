@@ -47,6 +47,7 @@ module test_mux_3;
             $finish;
         end
 
+        $display("All tests passed");
         #period $finish;
     end
 endmodule

@@ -140,6 +140,7 @@ module test_data_memory();
             $finish;
         end
 
+        $display("All tests passed");
         #period $finish;
     end
 endmodule
