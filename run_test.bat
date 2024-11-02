@@ -5,7 +5,12 @@ if exist "simulation\%1.vcd" (
     rm simulation\%1.vcd -f
 )
 
-iverilog -g2012 -o simulation\%1 tests\%1.test.sv modules\%1.sv
+if "%1" == "riscv" (
+    iverilog -g2012 -o simulation\%1 tests\%1.test.sv %1.sv
+) else (
+    iverilog -g2012 -o simulation\%1 tests\%1.test.sv modules\%1.sv
+)
+
 cd simulation
 vvp %1
 cd ..

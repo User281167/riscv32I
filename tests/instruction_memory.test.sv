@@ -25,7 +25,7 @@ module test_instruction_memory;
             $finish;
         end
 
-        address = 1;
+        address = 1 * 4;
         expected = 32'h000002b3;
         #10;
 
@@ -34,7 +34,7 @@ module test_instruction_memory;
             $finish;
         end
 
-        address = 2;
+        address = 2 * 4;
         expected = 32'h02060063;
         #10;
 
@@ -43,7 +43,7 @@ module test_instruction_memory;
             $finish;
         end
 
-        address = 3;
+        address = 3 * 4;
         expected = 32'h00064863;
         #10;
 
@@ -52,7 +52,7 @@ module test_instruction_memory;
             $finish;
         end
 
-        address = 17;
+        address = 17 * 4;
         expected = 32'h00000000;
         #10;
 

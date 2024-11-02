@@ -2,7 +2,7 @@ module sum_4 (
     input logic [31:0] current_pc,
     output logic [31:0] next_pc
 );
-    always @(current_pc) begin
-        next_pc <= current_pc + 4;
+    always_comb begin
+        next_pc = current_pc + 4;
     end
 endmodule
