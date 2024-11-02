@@ -16,12 +16,14 @@ module register_unit(
         end
     end
 
-    always @(posedge clk) begin
+    always_ff @(posedge clk) begin
         if (write_en == 1 && (rd != 0) && !$isunknown(rd)) begin
             registers[rd] <= write_data;
         end
+    end
 
-        if (!$isunknown(rs1)) rs1_data <= registers[rs1];
-        if (!$isunknown(rs2)) rs2_data <= registers[rs2];
+    always_comb begin
+        if (!$isunknown(rs1)) rs1_data = registers[rs1];
+        if (!$isunknown(rs2)) rs2_data = registers[rs2];
     end
 endmodule

@@ -6,6 +6,7 @@ module data_memory(
     output logic [31:0] read_data
 );
     logic [7:0] memory[4095:0]; // 4 KB memory
+    logic [31:0] temp_data;
 
     initial begin
         for (int i = 0; i < 1024; i++) begin
@@ -14,6 +15,8 @@ module data_memory(
     end
 
     always @(*) begin
+        read_data = 0;
+
         if (write_en) begin
             case (dm_control)
                 3'b000: begin
@@ -31,25 +34,26 @@ module data_memory(
                 end
             endcase
         end
-
-        if (write_en == 0) begin
+        else if (write_en == 0) begin
             case (dm_control)
                 3'b000: begin // load byte
-                    read_data <= {{24{memory[address][7]}}, memory[address][7:0]};
+                    read_data = {{24{memory[address][7]}}, memory[address][7:0]};
                 end
                 3'b001: begin // load halfword
-                    read_data <= {{16{memory[address + 1][7]}}, memory[address + 1], memory[address]};
+                    read_data = {{16{memory[address + 1][7]}}, memory[address + 1], memory[address]};
                 end
                 3'b010: begin // load word
-                    read_data <= {memory[address + 3], memory[address + 2], memory[address + 1], memory[address]};
+                    read_data = {memory[address + 3], memory[address + 2], memory[address + 1], memory[address]};
                 end
                 3'b100: begin // load byte unsigned
-                    read_data <= {{24{1'b0}}, memory[address]};
+                    read_data = {{24{1'b0}}, memory[address]};
                 end
                 3'b101: begin // load halfword unsigned
-                    read_data <= {{16{1'b0}}, memory[address + 1], memory[address]};
+                    read_data = {{16{1'b0}}, memory[address + 1], memory[address]};
                 end
             endcase
         end
     end
+
+    // assign read_data = temp_data;
 endmodule

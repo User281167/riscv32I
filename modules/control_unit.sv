@@ -20,7 +20,7 @@ module control_unit(
 
             alu_a <= 0;
             alu_b <= 0;
-            branch_op <= 5'bxxxxx;
+            branch_op <= 5'b00xxx;
 
             data_write_en <= 0;
             dm_control <= 3'bxxx;
@@ -54,7 +54,7 @@ module control_unit(
 
             alu_a <= 0;
             alu_b <= 1;
-            branch_op = 5'bxxxxx;
+            branch_op = 5'b00xxx;
 
             data_write_en = 0;
             dm_control = 3'bxxx;
@@ -170,7 +170,7 @@ module control_unit(
 
             data_write_en = 0;
             dm_control = 3'bxxx;
-            rd_data = 2'b10;
+            rd_data = 2'b00;
 
             case (funct3)
                 3'h0: branch_op <= 5'b1xxxx;

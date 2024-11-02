@@ -49,6 +49,7 @@ module test_control_unit;
             alu_b != 0 ||
             alu_op != 4'b0000 ||
             data_write_en != 0 ||
+            branch_op != 5'b00xxx ||
             rd_data != 2'b00
         ) begin
             $display("Sum controls failed");
@@ -67,6 +68,7 @@ module test_control_unit;
             alu_b != 0 ||
             alu_op != 4'b1000 ||
             data_write_en != 0 ||
+            branch_op != 5'b00xxx ||
             rd_data != 2'b00
         ) begin
             $display("Sub controls failed");
