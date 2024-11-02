@@ -1,5 +1,9 @@
 @echo off
 
+if not exist "simulation\" (
+    mkdir simulation
+)
+
 if exist "simulation\%1.vcd" (
     rm simulation\%1 -f
     rm simulation\%1.vcd -f
