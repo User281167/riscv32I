@@ -15,65 +15,45 @@ module control_unit(
     always @(*) begin
         // instruction type R
         if (opcode == 7'b0110011) begin
-            register_write_en = 1;
-            imm_src = 3'bxxx;
+            register_write_en <= 1;
+            imm_src <= 3'bxxx;
 
-            alu_a = 0;
-            alu_b = 0;
-            branch_op = 5'bxxxxx;
+            alu_a <= 0;
+            alu_b <= 0;
+            branch_op <= 5'bxxxxx;
 
-            data_write_en = 0;
-            dm_control = 3'bxxx;
-            rd_data = 0;
+            data_write_en <= 0;
+            dm_control <= 3'bxxx;
+            rd_data <= 0;
 
             if (funct7 == 7'h00) begin
                 case (funct3)
-                    3'h0: begin
-                        alu_op = 4'b0000; // add
-                    end
-                    3'h4: begin
-                        alu_op = 4'b0100; // xor
-                    end
-                    3'h6: begin
-                        alu_op = 4'b0110; // or
-                    end
-                    3'h7: begin
-                        alu_op = 4'b0111; // and
-                    end
-                    3'h1: begin
-                        alu_op = 4'b0001; // sll
-                    end
-                    3'h5: begin
-                        alu_op = 4'b0101; // srl
-                    end
-                    3'h2: begin
-                        alu_op = 4'b0010; // slt
-                    end
-                    3'h3: begin
-                        alu_op = 4'b0011; // sltu
-                    end
+                    3'h0: alu_op <= 4'b0000; // add
+                    3'h4: alu_op <= 4'b0100; // xor
+                    3'h6: alu_op <= 4'b0110; // or
+                    3'h7: alu_op <= 4'b0111; // and
+                    3'h1: alu_op <= 4'b0001; // sll
+                    3'h5: alu_op <= 4'b0101; // srl
+                    3'h2: alu_op <= 4'b0010; // slt
+                    3'h3: alu_op <= 4'b0011; // sltu
                 endcase
             end
 
             if (funct7 == 7'h20) begin
                 case (funct3)
-                    3'h0: begin
-                        alu_op = 4'b1000; // sub
-                    end
-                    3'h4: begin
-                        alu_op = 4'b1101; // sra
-                    end
+                    3'h0: alu_op <= 4'b1000; // sub
+                    3'h4: alu_op <= 4'b1101; // sra
                 endcase
             end
         end
 
         // instruction type I
         if (opcode == 7'b0010011) begin
-            register_write_en = 1;
-            imm_src = 3'b000;
+            register_write_en <= 1;
+            imm_src <= 3'b000;
 
-            alu_a = 0;
-            alu_b = 1;
+            alu_a <= 0;
+            alu_b <= 1;
             branch_op = 5'bxxxxx;
 
             data_write_en = 0;
@@ -81,163 +61,102 @@ module control_unit(
             rd_data = 0;
 
             case (funct3)
-                3'h0: begin
-                    alu_op = 4'b0000; // addi
-                end
-                3'h4: begin
-                    alu_op = 4'b0100; // xori
-                end
-                3'h6: begin
-                    alu_op = 4'b0110; // ori
-                end
-                3'h7: begin
-                    alu_op = 4'b0111; // andi
-                end
-                3'h1: begin
-                    alu_op = 4'b0001; // slli
-                end
-                3'h5: begin
-                    alu_op = 4'b0101; // srli
-                end
-                3'h5: begin
-                    alu_op = 4'b1101; // srai
-                end
-                3'h2: begin
-                    alu_op = 4'b0010; // slti
-                end
-                3'h3: begin
-                    alu_op = 4'b0011; // sltiu
-                end
+                3'h0: alu_op <= 4'b0000; // addi
+                3'h4: alu_op <= 4'b0100; // xori
+                3'h6: alu_op <= 4'b0110; // ori
+                3'h7: alu_op <= 4'b0111; // andi
+                3'h1: alu_op <= 4'b0001; // slli
+                3'h5: alu_op <= 4'b0101; // srli
+                3'h5: alu_op <= 4'b1101; // srai // not supported
+                3'h2: alu_op <= 4'b0010; // slti
+                3'h3: alu_op <= 4'b0011; // sltiu
             endcase
         end
 
         // instruction type Load
         if (opcode == 7'b0000011) begin
-            register_write_en = 1;
-            imm_src = 3'b000;
+            register_write_en <= 1;
+            imm_src <= 3'b000;
 
-            alu_a = 0;
-            alu_b = 1;
-            alu_op = 4'b0000;
-            branch_op = 5'bxxxxx;
+            alu_a <= 0;
+            alu_b <= 1;
+            alu_op <= 4'b0000;
+            branch_op <= 5'bxxxxx;
 
-            data_write_en = 0;
-            rd_data = 2'b01;
+            data_write_en <= 0;
+            rd_data <= 2'b01;
 
             case (funct3)
-                3'h0: begin
-                    dm_control = 3'b000; // load byte
-                end
-                3'h1: begin
-                    dm_control = 3'b001; // load halfword
-                end
-                3'h2: begin
-                    dm_control = 3'b010; // load word
-                end
-                3'h4: begin
-                    dm_control = 3'b100; // load byte unsigned
-                end
-                3'h5: begin
-                    dm_control = 3'b101; // load halfword unsigned
-                end
+                3'h0: dm_control <= 3'b000; // load byte
+                3'h1: dm_control <= 3'b001; // load halfword
+                3'h2: dm_control <= 3'b010; // load word
+                3'h4: dm_control <= 3'b100; // load byte unsigned
+                3'h5: dm_control <= 3'b101; // load halfword unsigned
             endcase
         end
 
         // instruction type S
         if (opcode == 7'b0100011) begin
-            register_write_en = 0;
-            imm_src = 3'b001;
+            register_write_en <= 0;
+            imm_src <= 3'b001;
 
-            alu_a = 0;
-            alu_b = 1;
-            alu_op = 4'b0000;
-            branch_op = 5'bxxxxx;
+            alu_a <= 0;
+            alu_b <= 1;
+            alu_op <= 4'b0000;
+            branch_op <= 5'bxxxxx;
 
-            data_write_en = 1;
-            rd_data = 2'bxx;
+            data_write_en <= 1;
+            rd_data <= 2'bxx;
 
             case (funct3)
-                3'h0: begin
-                    dm_control = 3'b000; // store byte
-                end
-                3'h1: begin
-                    dm_control = 3'b001; // store halfword
-                end
-                3'h2: begin
-                    dm_control = 3'b010; // store word
-                end
+                3'h0: dm_control <= 3'b000; // store byte
+                3'h1: dm_control <= 3'b001; // store halfword
+                3'h2: dm_control <= 3'b010; // store word
             endcase
         end
 
         // instruction type B
         if (opcode == 7'b1100011) begin
-            register_write_en = 0;
-            imm_src = 3'b101;
+            register_write_en <= 0;
+            imm_src <= 3'b101;
 
-            alu_a = 1;
-            alu_b = 1;
-            alu_op = 4'b0000;
+            alu_a <= 1;
+            alu_b <= 1;
+            alu_op <= 4'b0000;
 
-            data_write_en = 0;
-            dm_control = 3'bxxx;
-            rd_data = 2'bxx;
+            data_write_en <= 0;
+            dm_control <= 3'bxxx;
+            rd_data <= 2'bxx;
 
             case (funct3)
-                3'h0: begin
-                    branch_op = 5'b01000; // beq
-                end
-                3'h1: begin
-                    branch_op = 5'b01001; // bnq
-                end
-                3'h4: begin
-                    branch_op = 5'b01100; // blt
-                end
-                3'h5: begin
-                    branch_op = 5'b01101; // bge
-                end
-                3'h6: begin
-                    branch_op = 5'b01110; // bltu
-                end
-                3'h7: begin
-                    branch_op = 5'b01111; // bgeu
-                end
-                3'h7: begin
-                    branch_op = 5'b00xxx; // beq0
-                end
-                3'h7: begin
-                    branch_op = 5'b1xxxx; // beq1
-                end
+                3'h0: branch_op <= 5'b01000; // beq
+                3'h1: branch_op <= 5'b01001; // bnq
+                3'h4: branch_op <= 5'b01100; // blt
+                3'h5: branch_op <= 5'b01101; // bge
+                3'h6: branch_op <= 5'b01110; // bltu
+                3'h7: branch_op <= 5'b01111; // bgeu
             endcase
         end
 
-        // instruction type U lui
+        // instruction type U are not supported
         if (opcode == 7'b0110111) begin
-            register_write_en = 1;
-            imm_src = 3'b010;
-            // falta agregar un multiplexor a la alu
-            alu_a = 0;
-            alu_b = 1;
-            alu_op = 4'b0000;
-
-            data_write_en = 0;
-            dm_control = 3'bxxx;
-            rd_data = 2'bxx;
+            $display("U-type instructions not supported");
+            $finish;
         end
 
         // instruction type J jal
         if (opcode == 7'b1101111) begin
-            register_write_en = 1;
-            imm_src = 3'b110;
+            register_write_en <= 1;
+            imm_src <= 3'b110;
 
-            alu_a = 1;
-            alu_b = 1;
-            alu_op = 4'b0000;
+            alu_a <= 1;
+            alu_b <= 1;
+            alu_op <= 4'b0000;
+            branch_op <= 5'b1xxxx;
 
-            data_write_en = 0;
-            dm_control = 3'bxxx;
-            rd_data = 2'b10;
-
-            branch_op = 5'b11111;
+            data_write_en <= 0;
+            dm_control <= 3'bxxx;
+            rd_data <= 2'b10;
         end
 
         // instruction type J jalr
@@ -254,9 +173,7 @@ module control_unit(
             rd_data = 2'b10;
 
             case (funct3)
-                3'h0: begin
-                    branch_op = 5'b11111;
-                end
+                3'h0: branch_op <= 5'b1xxxx;
             endcase
         end
     end

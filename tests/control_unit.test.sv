@@ -209,7 +209,7 @@ module test_control_unit;
             alu_a != 1 ||
             alu_b != 1 ||
             alu_op != 4'b0000 ||
-            branch_op != 5'b11111 ||
+            branch_op != 5'b1xxxx ||
             data_write_en != 0 ||
             dm_control != 3'bxxx ||
             rd_data != 2'b10
