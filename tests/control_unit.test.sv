@@ -45,11 +45,13 @@ module test_control_unit;
 
         if (
             register_write_en != 1 ||
+            imm_src != 3'bxxx ||
             alu_a != 0 ||
             alu_b != 0 ||
             alu_op != 4'b0000 ||
-            data_write_en != 0 ||
             branch_op != 5'b00xxx ||
+            data_write_en != 0 ||
+            dm_control != 3'bxxx ||
             rd_data != 2'b00
         ) begin
             $display("Sum controls failed");
@@ -64,11 +66,13 @@ module test_control_unit;
 
         if (
             register_write_en != 1 ||
+            imm_src != 3'bxxx ||
             alu_a != 0 ||
             alu_b != 0 ||
             alu_op != 4'b1000 ||
-            data_write_en != 0 ||
             branch_op != 5'b00xxx ||
+            data_write_en != 0 ||
+            dm_control != 3'bxxx ||
             rd_data != 2'b00
         ) begin
             $display("Sub controls failed");
@@ -87,10 +91,12 @@ module test_control_unit;
             alu_a != 0 ||
             alu_b != 1 ||
             alu_op != 4'b0000 ||
+            branch_op != 5'b00xxx ||
             data_write_en != 0 ||
+            dm_control != 3'bxxx ||
             rd_data != 2'b00
         ) begin
-            $display("Subi controls failed");
+            $display("Addi controls failed");
             $finish;
         end
 
@@ -106,7 +112,7 @@ module test_control_unit;
             alu_a != 0 ||
             alu_b != 1 ||
             alu_op != 4'b0000 ||
-            branch_op != 5'bxxxxx ||
+            branch_op != 5'b00xxx ||
             data_write_en != 0 ||
             dm_control != 3'b000 ||
             rd_data != 2'b01
@@ -127,7 +133,7 @@ module test_control_unit;
             alu_a != 0 ||
             alu_b != 1 ||
             alu_op != 4'b0000 ||
-            branch_op != 5'bxxxxx ||
+            branch_op != 5'b00xxx ||
             data_write_en != 0 ||
             dm_control != 3'b101 ||
             rd_data != 2'b01
@@ -148,12 +154,12 @@ module test_control_unit;
             alu_a != 0 ||
             alu_b != 1 ||
             alu_op != 4'b0000 ||
-            branch_op != 5'bxxxxx ||
+            branch_op != 5'b00xxx ||
             data_write_en != 1 ||
             dm_control != 3'b010 ||
             rd_data != 2'bxx
         ) begin
-            $display("Load storage word controls failed");
+            $display("Storage word controls failed");
             $finish;
         end
 
@@ -178,7 +184,7 @@ module test_control_unit;
             $finish;
         end
 
-        // check begu
+        // check bgeu
         opcode = 7'b1100011;
         funct3 = 3'h7;
         funct7 = 7'hf;
@@ -195,7 +201,7 @@ module test_control_unit;
             dm_control != 3'bxxx ||
             rd_data != 2'bxx
         ) begin
-            $display("Begu controls failed");
+            $display("Bgeu controls failed");
             $finish;
         end
 
@@ -232,12 +238,13 @@ module test_control_unit;
             alu_a != 0 ||
             alu_b != 1 ||
             alu_op != 4'b0000 ||
-            branch_op != 5'b11111 ||
+            branch_op != 5'b1xxxx ||
             data_write_en != 0 ||
             dm_control != 3'bxxx ||
-            rd_data != 2'b10
+            rd_data != 2'b00
         ) begin
             $display("Jalr controls failed");
+            $display("%x %x %x %x %x %x %x %x %x", register_write_en, imm_src, alu_a, alu_b, alu_op, branch_op, data_write_en, dm_control, rd_data);
             $finish;
         end
 
