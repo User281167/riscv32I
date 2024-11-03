@@ -10,6 +10,7 @@ This repository contains a simple and efficient implementation of the RISC-V 32I
 - Written in SystemVerilog for hardware description and design
 - Easy to understand and extend for custom projects
 - Suitable for educational use and small-scale RISC-V projects
+- Note: U-type instructions are not supported.
 
 ### Getting Started
 
