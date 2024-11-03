@@ -11,7 +11,7 @@ module test_control_unit;
     logic [4:0] branch_op;
     logic data_write_en;
     logic [2:0] dm_control;
-    logic [1:0] rd_data;
+    logic [1:0] rd_data_sel;
 
     int half_period = 10;
     int period = 20;
@@ -28,7 +28,7 @@ module test_control_unit;
         .branch_op(branch_op),
         .data_write_en(data_write_en),
         .dm_control(dm_control),
-        .rd_data(rd_data)
+        .rd_data_sel(rd_data_sel)
     );
 
     initial begin
@@ -52,7 +52,7 @@ module test_control_unit;
             branch_op != 5'b00xxx ||
             data_write_en != 0 ||
             dm_control != 3'bxxx ||
-            rd_data != 2'b00
+            rd_data_sel != 2'b00
         ) begin
             $display("Sum controls failed");
             $finish;
@@ -73,7 +73,7 @@ module test_control_unit;
             branch_op != 5'b00xxx ||
             data_write_en != 0 ||
             dm_control != 3'bxxx ||
-            rd_data != 2'b00
+            rd_data_sel != 2'b00
         ) begin
             $display("Sub controls failed");
             $finish;
@@ -94,7 +94,7 @@ module test_control_unit;
             branch_op != 5'b00xxx ||
             data_write_en != 0 ||
             dm_control != 3'bxxx ||
-            rd_data != 2'b00
+            rd_data_sel != 2'b00
         ) begin
             $display("Addi controls failed");
             $finish;
@@ -115,7 +115,7 @@ module test_control_unit;
             branch_op != 5'b00xxx ||
             data_write_en != 0 ||
             dm_control != 3'b000 ||
-            rd_data != 2'b01
+            rd_data_sel != 2'b01
         ) begin
             $display("Load byte controls failed");
             $finish;
@@ -136,7 +136,7 @@ module test_control_unit;
             branch_op != 5'b00xxx ||
             data_write_en != 0 ||
             dm_control != 3'b101 ||
-            rd_data != 2'b01
+            rd_data_sel != 2'b01
         ) begin
             $display("Load halfword unsigned controls failed");
             $finish;
@@ -157,7 +157,7 @@ module test_control_unit;
             branch_op != 5'b00xxx ||
             data_write_en != 1 ||
             dm_control != 3'b010 ||
-            rd_data != 2'bxx
+            rd_data_sel != 2'bxx
         ) begin
             $display("Storage word controls failed");
             $finish;
@@ -178,7 +178,7 @@ module test_control_unit;
             branch_op != 5'b01000 ||
             data_write_en != 0 ||
             dm_control != 3'bxxx ||
-            rd_data != 2'bxx
+            rd_data_sel != 2'bxx
         ) begin
             $display("Beq controls failed");
             $finish;
@@ -199,7 +199,7 @@ module test_control_unit;
             branch_op != 5'b01111 ||
             data_write_en != 0 ||
             dm_control != 3'bxxx ||
-            rd_data != 2'bxx
+            rd_data_sel != 2'bxx
         ) begin
             $display("Bgeu controls failed");
             $finish;
@@ -220,7 +220,7 @@ module test_control_unit;
             branch_op != 5'b1xxxx ||
             data_write_en != 0 ||
             dm_control != 3'bxxx ||
-            rd_data != 2'b10
+            rd_data_sel != 2'b10
         ) begin
             $display("Jal controls failed");
             $finish;
@@ -241,10 +241,10 @@ module test_control_unit;
             branch_op != 5'b1xxxx ||
             data_write_en != 0 ||
             dm_control != 3'bxxx ||
-            rd_data != 2'b00
+            rd_data_sel != 2'b00
         ) begin
             $display("Jalr controls failed");
-            $display("%x %x %x %x %x %x %x %x %x", register_write_en, imm_src, alu_a, alu_b, alu_op, branch_op, data_write_en, dm_control, rd_data);
+            $display("%x %x %x %x %x %x %x %x %x", register_write_en, imm_src, alu_a, alu_b, alu_op, branch_op, data_write_en, dm_control, rd_data_sel);
             $finish;
         end
 

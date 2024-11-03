@@ -10,7 +10,7 @@ module control_unit(
     output logic [4:0] branch_op,
     output logic data_write_en,
     output logic [2:0] dm_control,
-    output logic [1:0] rd_data
+    output logic [1:0] rd_data_sel
 );
     always @(*) begin
         // instruction type R
@@ -24,7 +24,7 @@ module control_unit(
 
             data_write_en <= 0;
             dm_control <= 3'bxxx;
-            rd_data <= 0;
+            rd_data_sel <= 0;
 
             if (funct7 == 7'h00) begin
                 case (funct3)
@@ -58,7 +58,7 @@ module control_unit(
 
             data_write_en = 0;
             dm_control = 3'bxxx;
-            rd_data = 0;
+            rd_data_sel = 0;
 
             case (funct3)
                 3'h0: alu_op <= 4'b0000; // addi
@@ -81,10 +81,10 @@ module control_unit(
             alu_a <= 0;
             alu_b <= 1;
             alu_op <= 4'b0000;
-            branch_op <= 5'bxxxxx;
+            branch_op <= 5'b00xxx;
 
             data_write_en <= 0;
-            rd_data <= 2'b01;
+            rd_data_sel <= 2'b01;
 
             case (funct3)
                 3'h0: dm_control <= 3'b000; // load byte
@@ -103,10 +103,10 @@ module control_unit(
             alu_a <= 0;
             alu_b <= 1;
             alu_op <= 4'b0000;
-            branch_op <= 5'bxxxxx;
+            branch_op <= 5'b00xxx;
 
             data_write_en <= 1;
-            rd_data <= 2'bxx;
+            rd_data_sel <= 2'bxx;
 
             case (funct3)
                 3'h0: dm_control <= 3'b000; // store byte
@@ -126,7 +126,7 @@ module control_unit(
 
             data_write_en <= 0;
             dm_control <= 3'bxxx;
-            rd_data <= 2'bxx;
+            rd_data_sel <= 2'bxx;
 
             case (funct3)
                 3'h0: branch_op <= 5'b01000; // beq
@@ -156,7 +156,7 @@ module control_unit(
 
             data_write_en <= 0;
             dm_control <= 3'bxxx;
-            rd_data <= 2'b10;
+            rd_data_sel <= 2'b10;
         end
 
         // instruction type J jalr
@@ -167,10 +167,11 @@ module control_unit(
             alu_a = 0;
             alu_b = 1;
             alu_op = 4'b0000;
+            branch_op <= 5'b1xxxx;
 
             data_write_en = 0;
             dm_control = 3'bxxx;
-            rd_data = 2'b00;
+            rd_data_sel = 2'b00;
 
             case (funct3)
                 3'h0: branch_op <= 5'b1xxxx;

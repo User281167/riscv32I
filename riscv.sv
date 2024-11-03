@@ -28,7 +28,7 @@ module riscv(
     logic [4:0] branch_op;
     logic data_write_en;
     logic [2:0] dm_control;
-    logic [1:0] rd_data;
+    logic [1:0] rd_data_sel;
 
     logic [31:0] rs1_data, rs2_data;
     logic [31:0] imm;
@@ -41,9 +41,9 @@ module riscv(
     logic [31:0] read_data;
 
     // write back
-    logic [31:0] write_rd_data;
+    logic [31:0] rd_data;
 
-    always_comb begin
+    always @(instruction) begin
         if (instruction == 0) $finish;
     end
 
@@ -77,7 +77,7 @@ module riscv(
         .branch_op(branch_op),
         .data_write_en(data_write_en),
         .dm_control(dm_control),
-        .rd_data(rd_data)
+        .rd_data_sel(rd_data_sel)
     );
 
     register_unit _reg_unit(
@@ -85,7 +85,7 @@ module riscv(
         .rs1(instruction[19:15]),
         .rs2(instruction[24:20]),
         .rd(instruction[11:7]),
-        .write_data(write_rd_data),
+        .write_data(rd_data),
         .write_en(register_write_en),
         .rs1_data(rs1_data),
         .rs2_data(rs2_data)
@@ -147,7 +147,7 @@ module riscv(
         .a(alu_out),
         .b(read_data),
         .c(pc_4),
-        .sel(rd_data),
-        .mux_out(write_rd_data)
+        .sel(rd_data_sel),
+        .mux_out(rd_data)
     );
 endmodule

@@ -16,7 +16,17 @@ if "%1" == "riscv" (
 )
 
 cd simulation
-vvp %1
+
+if "%~3"=="" (
+    if "%1"=="riscv" (
+        vvp %1 +file="..\programs\%2.byte" @REM pass parameter to riscv
+    ) else (
+        vvp %1 @REM only synthesis
+    )
+) else (
+    vvp %1 +file="..\programs\%3.byte" @REM pass parameter to riscv and open waveform
+)
+
 cd ..
 
 if "%2" == "gtk" (
