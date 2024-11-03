@@ -58,16 +58,14 @@ Do not use the file extension, just the name.
 **To run all tests:**
 
 ```
-.\run_test.bat
+.\run_all_test.bat
 ```
 
-**Clear a log txt file:**
+**Clear log.txt file:**
 
 ```
-.\run_test.bat
+.\run_all_test.bat clear
 ```
-
-The file is cleared in each run.
 
 Vpp files are saved in the `simulation` folder, which is created by the bat file.
 
