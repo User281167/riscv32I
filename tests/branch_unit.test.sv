@@ -173,11 +173,27 @@ module test_branch_unit();
             $finish;
         end
 
-        branch_op = 5'b00xxx;
+        branch_op = 5'b00000;
         #period;
 
         if (branch_out != 0) begin
             $display("Test 18 (0) failed");
+            $finish;
+        end
+
+        branch_op = 5'b1xxxx;
+        #period;
+
+        if (branch_out != 1) begin
+            $display("Test 19 (0) failed");
+            $finish;
+        end
+
+        branch_op = 5'b00xxx;
+        #period;
+
+        if (branch_out != 0) begin
+            $display("Test 20 (0) failed");
             $finish;
         end
 
