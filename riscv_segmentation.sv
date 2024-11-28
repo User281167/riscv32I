@@ -14,9 +14,6 @@
 `include "modules/mux_3.sv"
 
 `include "modules/register_en_clear.sv"
-// `include "modules/register_en.sv"
-// `include "modules/register_en_clear.sv"
-// `include "modules/register_en_clear.sv"
 
 `include "modules/hazard_detection.sv"
 `include "modules/forwarding_unit.sv"
@@ -56,17 +53,6 @@ module riscv_segmentation (
 
     // write back
     logic [31:0] rd_data_wb;
-
-    // logic stop = 0;
-    // logic [1:0] end_stop = 0;
-
-    // always @(posedge clk) begin
-    //     // if (instruction_fe == 0) #10 $finish;
-    //     if (stop) end_stop = end_stop + 1;
-    //     if (end_stop == 3) #10 $finish;
-
-    //     if (instruction_fe == 0 && ~stop) stop = 1;
-    // end
 
     register_en_clear _pc_fe (
         .clk(clk),
@@ -176,10 +162,6 @@ module riscv_segmentation (
     logic [31:0] pc_4_ex, pc_ex;
     logic [4:0] rd_ex, rs1_ex, rs2_ex;
     logic [31:0] rs1_data_ex, rs2_data_ex, imm_ex;
-
-    // always @(posedge clk) begin
-        // $display("clear ex stall_de || branch_out_ex %b", stall_de || branch_out_ex);
-    // end
 
     register_en_clear #(
         .WIDTH(1)
