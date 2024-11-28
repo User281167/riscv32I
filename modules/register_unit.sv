@@ -1,4 +1,6 @@
-module register_unit(
+module register_unit #(
+    parameter USE_NEGEDGE = 0  // 0 for posedge, 1 for negedge
+) (
     input logic clk,
     input logic [4:0] rs1,
     input logic [4:0] rs2,
@@ -16,11 +18,21 @@ module register_unit(
         end
     end
 
-    always_ff @(posedge clk) begin
-        if (write_en == 1 && (rd != 0) && !$isunknown(rd)) begin
-            registers[rd] <= write_data;
+    generate
+        if (USE_NEGEDGE) begin
+            always_ff @(negedge clk) begin
+                if (write_en == 1 && (rd != 0) && !$isunknown(rd)) begin
+                    registers[rd] <= write_data;
+                end
+            end
+        end else begin
+            always_ff @(posedge clk) begin
+                if (write_en == 1 && (rd != 0) && !$isunknown(rd)) begin
+                    registers[rd] <= write_data;
+                end
+            end
         end
-    end
+    endgenerate
 
     always_comb begin
         if (!$isunknown(rs1)) rs1_data = registers[rs1];
