@@ -5,8 +5,7 @@ module hazard_detection (
     input logic [4:0] rd,
     output logic stall = 0
 );
-    always_comb begin
-        // stall = check && ((rs1 == rd) || (rs2 == rd));
+    always @(*) begin
         if (check) begin
             if (rs1 == rd) begin
                 stall = 1;
