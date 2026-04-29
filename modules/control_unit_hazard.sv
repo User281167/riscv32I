@@ -57,11 +57,11 @@ module control_unit_hazard (
 
             alu_a <= 0;
             alu_b <= 1;
-            branch_op = 5'b00xxx;
+            branch_op <= 5'b00xxx;
 
-            data_write_en = 0;
-            dm_control = 3'bxxx;
-            rd_data_sel = 0;
+            data_write_en <= 0;
+            dm_control <= 3'bxxx;
+            rd_data_sel <= 0;
 
             hazard <= 0;
 
@@ -174,17 +174,17 @@ module control_unit_hazard (
 
         // instruction type J jalr
         if (opcode == 7'b1100111) begin
-            register_write_en = 1;
-            imm_src = 3'b000;
+            register_write_en <= 1;
+            imm_src <= 3'b000;
 
-            alu_a = 0;
-            alu_b = 1;
-            alu_op = 4'b0000;
+            alu_a <= 0;
+            alu_b <= 1;
+            alu_op <= 4'b0000;
             branch_op <= 5'b1xxxx;
 
-            data_write_en = 0;
-            dm_control = 3'bxxx;
-            rd_data_sel = 2'b00;
+            data_write_en <= 0;
+            dm_control <= 3'bxxx;
+            rd_data_sel <= 2'b00;
 
             hazard <= 0;
 

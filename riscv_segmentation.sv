@@ -14,9 +14,6 @@
 `include "modules/mux_3.sv"
 
 `include "modules/register_en_clear.sv"
-// `include "modules/register_en.sv"
-// `include "modules/register_en_clear.sv"
-// `include "modules/register_en_clear.sv"
 
 `include "modules/hazard_detection.sv"
 `include "modules/forwarding_unit.sv"

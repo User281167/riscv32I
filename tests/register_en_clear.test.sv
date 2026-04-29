@@ -1,6 +1,6 @@
 `timescale 1ns/1ns
 
-module test_register_en;
+module test_register_en_clear;
     logic clk;
     logic enable;
     logic clear;
@@ -11,7 +11,7 @@ module test_register_en;
     int period = 20;
     int expected = 0;
 
-    register_en utt (
+    register_en_clear utt (
         .clk(clk),
         .enable(enable),
         .clear(clear),
@@ -20,8 +20,8 @@ module test_register_en;
     );
 
     initial begin
-        $dumpfile("register_en.vcd");
-        $dumpvars(0, test_register_en);
+        $dumpfile("register_en_clear.vcd");
+        $dumpvars(0, test_register_en_clear);
     end
 
     initial begin
@@ -75,6 +75,7 @@ module test_register_en;
         end
 
         expected = 189;
+        clear = 0;
         #period
 
         if (data_out != expected) begin
