@@ -21,13 +21,13 @@ module register_unit #(
     generate
         if (USE_NEGEDGE) begin
             always_ff @(negedge clk) begin
-                if (write_en == 1 && (rd != 0) && !$isunknown(rd)) begin
+                if (write_en == 1 && (rd != 0)) begin
                     registers[rd] <= write_data;
                 end
             end
         end else begin
             always_ff @(posedge clk) begin
-                if (write_en == 1 && (rd != 0) && !$isunknown(rd)) begin
+                if (write_en == 1 && (rd != 0)) begin
                     registers[rd] <= write_data;
                 end
             end
@@ -35,7 +35,7 @@ module register_unit #(
     endgenerate
 
     always_comb begin
-        if (!$isunknown(rs1)) rs1_data = registers[rs1];
-        if (!$isunknown(rs2)) rs2_data = registers[rs2];
+        rs1_data = registers[rs1];
+        rs2_data = registers[rs2];
     end
 endmodule
